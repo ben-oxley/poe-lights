@@ -23,10 +23,10 @@ FASTLED_USING_NAMESPACE
 #define DATA_PIN 0
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
-#define NUM_LEDS    50
+#define NUM_LEDS    100u
 
 CRGB leds[NUM_LEDS];
-#define BRIGHTNESS          24
+#define BRIGHTNESS         128
 #define FRAMES_PER_SECOND  120
 
 
@@ -120,6 +120,11 @@ void setup()
             Serial.print(", Data: ");
             Serial.write(packet.data(), packet.length());
             Serial.println();
+            uint8_t* d = packet.data();
+            memcpy(packet.data(),leds,min(packet.length(),NUM_LEDS*3));
+//            for( int i = 0; i < NUM_LEDS && i < packet.length()/3; i++) {
+//              leds[i] = CRGB(d[i*3],d[(i*3+1)],d[(i*3+2)]);
+//            }
             //reply to the client
             packet.printf("Got %u bytes of data", packet.length());
         });
