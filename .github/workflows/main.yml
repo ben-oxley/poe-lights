@@ -51,8 +51,8 @@ jobs:
       # dynamically by the build matrix.
       - name: Install platform
         run: |
-          arduino-cli core update-index
-          arduino-cli core install ${{ matrix.arduino-platform }}
+          arduino-cli core update-index --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
+          arduino-cli core install ${{ matrix.arduino-platform }} --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
           arduino-cli lib install ArduinoHttpClient
           
       - name: Create build folder
