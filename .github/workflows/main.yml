@@ -53,7 +53,9 @@ jobs:
         run: |
           arduino-cli core update-index --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
           arduino-cli core install ${{ matrix.arduino-platform }} --additional-urls https://dl.espressif.com/dl/package_esp32_index.json
-          arduino-cli lib install ArduinoHttpClient
+          arduino-cli lib install WiFi
+          arduino-cli lib install Ethernet
+          arduino-cli lib install FastLED
           
       - name: Create build folder
         run: mkdir ./build
